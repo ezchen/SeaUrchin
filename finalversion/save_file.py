@@ -41,7 +41,7 @@ if user!=-1:
 			# directory traversal attacks
 			fn = os.path.basename(fileitem.filename)
 			newname=str(int(itemid)+1)+'.'+fn.split('.')[1]
-			open('../data/' + newname, 'wb').write(fileitem.file.read())
+			open('../data/images/' + newname, 'wb').write(fileitem.file.read())
 			out += 'The file "' + fn + '" was uploaded successfully as' + newname
 		else:
 			out += 'No file was uploaded'

@@ -75,34 +75,6 @@ page='''
 '''
 page += lf.makeNavBar()
 
-def sell():
-    ans=''
-    user=lf.getUser()
-    f=open('../data/allfile.txt', 'r')
-    items=f.read().split('\n')
-    f.close()
-    itemid=items[-2].split(',')[0]
-    f=open('../data/allfile.txt', 'a')
-    if user!=-1:
-        if 'submit' in field.keys():
-            f.write(str(int(itemid)+1)+','+field['item'].value+','+lf.getUser()+','+field['0'].value+','+field['sb'].value+','+'bidder'+','+field['1'].value+','+field['description'].value+'\n')#user+','+
-            f.close()
-            fileitem = field['filename']
-            if fileitem.filename:
-                # strip leading path from file name to avoid 
-                # directory traversal attacks
-                fn = os.path.basename(fileitem.filename)
-                newname=str(int(itemid)+1)+'.'+fn.split('.')[1]
-                open('data/' + fn, 'wb').write(fileitem.file.read())
-                ans += 'The file "' + fn + '" was uploaded successfully'
-            else:
-                ans += 'No file was uploaded'
-    else:
-        ans+='''<meta HTTP-EQUIV="REFRESH" content="0; url=homepage.py">
-        <a href="homepage.py">Login</a>'''
-    return ans
-
-
 if len(field)<1:
     page+=form
 

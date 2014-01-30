@@ -50,7 +50,7 @@ def deleteItem(itemnumber, user = user):
 	D = lf.organizeData('../data/allfile.txt')
 	if itemnumber in D:
 		if D[itemnumber][1] == user:
-			imageFiles = glob.glob('../data/*.png') + glob.glob('../data/*.jpg')
+			imageFiles = glob.glob('../data/images/*.png') + glob.glob('../data/images/*.jpg')
 			del D[itemnumber]
 			for image in imageFiles:
 				imageid = stripEnding(os.path.basename(image))

@@ -127,7 +127,6 @@ def makeForm():
 	<input type="hidden" name="itemid" value="''' + fieldData['itemid'] + '''">
 	<input type="submit" class="button" value="bid">
 	</form>''' + '\n</div></div>\n'
-	html += '''<div class="row">'''
 	html += '\n<div class="span4">' + '\n<h3>ItemName</h3>'
 	html += '\n' + itemname + '\n</div>'
 	#condition
@@ -139,9 +138,9 @@ def makeForm():
 	html += '''</div>'''
 
 	#Owner and info
-	html += '\n</div>'
 	html += '\n<div class="span12">'
 	html += '\n' + '<strong>Owner</strong>: ' + username + '<br>' + '<strong>Email</strong>: ' + getEmail(username) + '</div>'
+	html += '\n</div>'
 
 	return html
 

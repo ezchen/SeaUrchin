@@ -45,7 +45,7 @@ def sold(itemid, pictureFile, filedirectory = '../data/allfile.txt'):
 	D = organizeData(filedirectory)
 	if itemid in D:
 		if os.path.isfile(pictureFile):
-			os.remove('../data/' + pictureFile)
+			os.remove(pictureFile)
 		
 
 #<--------------------Deletes the ip from the file------------------------>
