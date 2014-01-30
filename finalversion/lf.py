@@ -44,8 +44,7 @@ def e_pass_Field(D = fieldData):
 def sold(itemid, pictureFile, filedirectory = '../data/allfile.txt'):
 	D = organizeData(filedirectory)
 	if itemid in D:
-		del D[itemid]
-		if os.path.isfile('../data/' + pictureFile):
+		if os.path.isfile(pictureFile):
 			os.remove('../data/' + pictureFile)
 		
 

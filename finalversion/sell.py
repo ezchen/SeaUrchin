@@ -6,18 +6,18 @@ cgitb.enable()
 #<---------------Everything by Muhamed Rahman------------->
 from lf import field
 
-form='''<div class="container">
+form='''
 			<form class="form-horizontal" action="save_file.py" method="post" enctype="multipart/form-data">
 				<div class="control-group">
 					<label class="control-label" for="itemName"><b>Item Name</b></label>
 					<div class="controls">
-					<input class="input-large" type="text" name="item" id="itemName" placeholder="item name">
+					<input class="input-xxlarge" type="text" name="item" id="itemName" placeholder="item name">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="category"><b>Category</b></label>
 					<div class="controls">
-					<select id="category" name="0" class="input-large">
+					<select id="category" name="0" class="input-xxlarge">
 						<option value="All">All</option>
 						<option value="Home_and_Kitchen">Home and Kitchen</option>
 						<option value="Education">Education</option>
@@ -28,13 +28,13 @@ form='''<div class="container">
 				<div class="control-group">
 					<label class="control-label" for="description"><b>Description</b></label>
 					<div class="controls">
-					<textarea class="input-large" name="description" id="description" cols="25" rows="5"></textarea>
+					<textarea class="input-xxlarge" name="description" id="description" cols="25" rows="5"></textarea>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="condition"><b>Condition</b></label>
 					<div class="controls">
-					<select name="1" id="condition">
+					<select name="1" id="condition" class="input-xxlarge">
 					<option value="10">10</option>
 					<option value="9">9</option>
 					<option value="8">8</option>
@@ -48,7 +48,7 @@ form='''<div class="container">
 				<div class="control-group">
 					<label class="control-label" for="bid"><b>Starting Bid</b></label>
 					<div class="controls">
-					<input type="text" name="sb" placeholder="Enter Bid">
+					<input type="text" name="sb" placeholder="Enter Bid" class="input-xxlarge">
 					</div>
 				</div>
 				<div class="control-group">
@@ -61,7 +61,7 @@ form='''<div class="container">
 					<button type="submit" class="btn btn-default" name="next" value="next">Submit</button>
 				</div>
 			</form>
-</div>'''
+'''
 
 page='''
 <!DOCTYPE html>

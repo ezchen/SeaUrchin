@@ -18,7 +18,7 @@ def sellingData(username = user):
 	D = {}
 	for line in L:
 		if username in line and username == line[2]:
-			D[line[1]] = [line[0],line[3],line[5],line[4]]
+			D[line[0]] = [line[1],line[3],line[5],line[4]]
 	return D
 
 def buyingData(username = user):
@@ -53,10 +53,9 @@ def deleteItem(itemnumber, user = user):
 			imageFiles = glob.glob('../data/*.png') + glob.glob('../data/*.jpg')
 			del D[itemnumber]
 			for image in imageFiles:
-				itemid = stripEnding(image)
-				if itemnumber == itemid:
-					itemname = image
-					lf.sold(itemid, itemname)
+				imageid = stripEnding(os.path.basename(image))
+				if itemnumber == imageid:
+					lf.sold(itemnumber, image)
 			out = ''
 			for item in D:
 				out += item
@@ -94,7 +93,7 @@ def displaySold():
 				block += '<td>' + data + '</td>'
 	
 			form = 	'''<form method="get" action="profile.py">
-			<input type="hidden" name="solditem" value="''' + items[item][0] + '''"">
+			<input type="hidden" name="solditem" value="''' + item + '''"">
 			<input type="submit" value="Mark As Sold">
 			</form>
 			'''
@@ -148,7 +147,7 @@ def makePage():
 	'''
 	page += lf.makeNavBar()
 	if 'solditem' in fieldData:
-		page += '<div id="alert">You just sold' + fieldData['solditem'] + '</div>'
+		page += '<div id="alert">You just sold' + fieldData['solditem'][0] + '</div>'
 		deleteItem(fieldData['solditem'], lf.getUser())
 	page += displaySold()
 	page += displayBuying()
