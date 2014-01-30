@@ -1,0 +1,8 @@
+username1,password,email
+username3,password,thisisworking@work
+Eric Chen,5be84a45e876cf3cc8a977451e790bc1,echen2015@gmail.com
+asdf,912ec803b2ce49e4a541068d495ab570,awer@
+super,5be84a45e876cf3cc8a977451e790bc1,asdfasdf@
+ericchen20,5be84a45e876cf3cc8a977451e790bc1,echen2015@gmail.com
+ericchen123123,5be84a45e876cf3cc8a977451e790bc1,asdf@
+ericchen10,5be84a45e876cf3cc8a977451e790bc1,asdfasdfasdf@

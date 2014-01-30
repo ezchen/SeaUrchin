@@ -1,0 +1,4 @@
+002,itemname3,username3,category,1000,ericchen10,condition,This is a high quality item that I am using to test this site
+3,asdf,ericchen10,All,200,bidder,condition,description
+4,asdf,ericchen10,All,200,bidder,condition,description
+5,asdf,ericchen10,All,2000,bidder,10,description
