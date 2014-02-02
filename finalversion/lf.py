@@ -50,8 +50,8 @@ def sold(itemid, pictureFile, filedirectory = '../data/allfile.txt'):
 
 #<--------------------Deletes the ip from the file------------------------>
 def logout():
-	if lf.isLoggedIn('../data/loggedin.txt'):
-		loggindata = lf.organizeData('../data/loggedin.txt')
+	if isLoggedIn('../data/loggedin.txt'):
+		loggindata = organizeData('../data/loggedin.txt')
 		del loggindata[str(cgi.escape(os.environ["REMOTE_ADDR"]))]
 		out = ''
 		for key in loggindata:
@@ -72,7 +72,6 @@ def isLoggedIn(filedirectory = '../data/loggedin.txt'):
     	if D[ip][1] == 'true':
     		return True
     	elif ts - float(D[ip][1]) > 2000:
-    		logout()
     		return False
     	else:
     		return True
@@ -136,14 +135,17 @@ def accountCreater(fieldData, UsersDirectory):
 #<--- Returns True or False based on whether or not the ipaddress is in the file--->
 def loginChecker(fieldData, UsersDirectory):
 	userData = organizeData(UsersDirectory)
-	if fieldData['user'] in userData:
-		return e_pass_Field(fieldData) == userData[fieldData['user']][0]
+	if 'user' in fieldData and 'password' in fieldData:
+		if fieldData['user'] in userData:
+			return e_pass_Field(fieldData) == userData[fieldData['user']][0]
+	else:
+		return False
 
 #<--- Returns a string with the navbar. This should be at the top of
 #		Every file after the <body> --->
 #filedirectory is loggedin.txt
 def makeNavBar(filedirectory = '../data/loggedin.txt'):
-	navbar = '''<div class="navbar">
+	navbar = '''<div class="navbar navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="brand" href="homepage.py">Sea-Urchin</a>
@@ -162,7 +164,7 @@ def makeNavBar(filedirectory = '../data/loggedin.txt'):
 		user = ipDictionary[str(cgi.escape(os.environ["REMOTE_ADDR"]))][0]
 		navbar += '''<ul class="nav pull-right">
 				<li>
-					<a href="profile.py">ericchen10</a>
+					<a href="profile.py">''' + user + '''</a>
 				</li>
 				<li>
 					<a href="sell.py">Sell</a>

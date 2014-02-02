@@ -39,14 +39,27 @@ def stripEnding(image):
 	index = image.find('.')
 	return image[:index]
 
-def removeWatch(itemnumber, user = lf.getUser()):
-	D = lf.organizeData('../data/watch.txt')
-	if user in D:
+#removes every instance of itemnumber in the watch.txt file
+def removeWatch(itemnumber, filedirectory='../data/watch.txt'):
+	D = lf.organizeData(filedirectory)
+	for user in D:
 		if itemnumber in D[user]:
 			D[user] = D[user].remove(itemnumber)
+			if D[user] is None:
+				D[user] = []
+
+	out = ''
+	for user in D:
+		out+=user
+		for itemnumber in D[user]:
+			out += ',' + itemnumber
+	f = open(filedirectory, 'w')
+	f.write(out)
+	f.close()
+
 
 def deleteItem(itemnumber, user = user):
-	removeWatch(itemnumber, user)
+	removeWatch(itemnumber)
 	D = lf.organizeData('../data/allfile.txt')
 	if itemnumber in D:
 		if D[itemnumber][1] == user:

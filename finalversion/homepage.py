@@ -125,7 +125,7 @@ def makeFailLoginPage():
 			<label for="checkbox">Remember me</label>
 		</div>
 
-		<input type="submit" name="submit" class="button" value="Login">
+		<input type="submit" name="login" class="button" value="Login">
 	</form>'''
 
 def alreadyLoggedIn():

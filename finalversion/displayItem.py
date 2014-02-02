@@ -3,6 +3,7 @@ import cgi, cgitb
 cgitb.enable()
 import lf
 import glob
+import os
 
 print 'Content-Type: text/html\n\n'
 
@@ -85,10 +86,9 @@ def getEmail(username):
 
 fieldData = lf.getFieldData()
 
-imageFiles = glob.glob('../data/*.png') + glob.glob('../data/*.jpg')
 
-def itemName(filedirectory = '../data/'):
-	imageFiles = glob.glob('../data/*.png') + glob.glob('../data/*.jpg')
+def itemName(filedirectory = '../data/images'):
+	imageFiles = glob.glob('../data/images/*.png') + glob.glob('../data/images/*.jpg')
 	itemnumber = getItemNumber()
 
 	if itemnumber == 'nopicture':
@@ -101,9 +101,9 @@ def itemName(filedirectory = '../data/'):
 			name = user + itemname
 
 			for image in imageFiles:
-				itemid = stripEnding(image)
-				if name == itemid:
-					itemname = image
+				itemid = stripEnding(os.path.basename(image))
+				if itemnumber == itemid:
+					return os.path.basename(image)
 				else:
 					itemname = 'nopicture.jpg'
 	return itemname
@@ -161,7 +161,12 @@ if lf.isLoggedIn():
 	page = lf.makeNavBar()
 	page += '<div class="container">'
 	page += '<div class="row">'
-	page += '<div class="span8"><img src="../data/' + itemName() + '" alt="Item" class="img-rounded"></div>'
+	page += '<div class="span8" style="min-height:430px">'
+	page += '''
+<ul class="thumbnails">
+	<li class="span8">
+		<div class="thumbnail" style="min-height:430px">
+			<img src="../data/images/''' + itemName() + '''"alt="Item"></div></div>'''
 	if 'bid' in fieldData:
 		page+='<div class="span4"><div class="alert alert-error">' + bid() + '</div></div>'
 	page += makeForm()
