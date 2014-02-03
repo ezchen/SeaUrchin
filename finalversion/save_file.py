@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 print 'Content-Type: text/html\n\n'
 import cgi, os, lf
-import cgitb; cgitb.enable()
+import cgitb; 
+cgitb.enable()
 
 page='''
 <!DOCTYPE html>
@@ -26,14 +27,22 @@ fileitem = field['file']
 
 out=''
 user=lf.getUser()
+
 f=open('../data/allfile.txt', 'r')
 items=f.read().split('\n')
 f.close()
-itemid=items[-2].split(',')[0]
+
+f=open('../data/itemNumber.txt', 'r')
+itemid=f.readline()
+f.close()
+
 f=open('../data/allfile.txt', 'a')
 
 if user!=-1:
 		f.write(str(int(itemid)+1)+','+field['item'].value+','+lf.getUser()+','+field['0'].value+','+field['sb'].value+','+'bidder'+','+field['1'].value+','+field['description'].value+'\n')#user+','+
+		f.close()
+		f=open('../data/itemNumber.txt', 'w')
+		f.write(str(int(itemid)+1))
 		f.close()
 		fileitem = field['file']
 		if fileitem.filename:
@@ -42,6 +51,7 @@ if user!=-1:
 			fn = os.path.basename(fileitem.filename)
 			newname=str(int(itemid)+1)+'.'+fn.split('.')[1]
 			open('../data/images/' + newname, 'wb').write(fileitem.file.read())
+			out += '''<meta HTTP-EQUIV="REFRESH" content="0; url=displayItem.py?itemid=%s">''' % (str(int(itemid)+1))
 			out += 'The file "' + fn + '" was uploaded successfully as' + newname
 		else:
 			out += 'No file was uploaded'

@@ -1,4 +1,6 @@
-Eric Chen, Muhamed Rahman
+This site is meant to replace craigslist. Craigslist's function as a trading website is great,
+but the website itself is unaesthetic. The links do not display images and is not completely
+discriptive of the item. We hope that our site will offer a better user experience.
 
 Features
 
@@ -10,7 +12,8 @@ LF.PY
 		-your profile(displays it as your username)
 		-sell
 		-logout(lets you logout...)
-
+	-If you're not logged in...
+		-dropdown menu - login.
 HOMEPAGE.PY
 -ability to create an account and login
 -ability to "stay logged in", which will keep you logged in on the computer u logged in
@@ -34,8 +37,7 @@ PROFILE.PY
 SEARCH.PY
 -Searches for an item based on what you enter in the search form on the navigation bar
 -You can search based on categories too
--If you like an item, you can click on the button to the right which will take you
-	to a bidding page
+-If you like an item, you can click on it and bid. This will take you to displayItem.py
 
 DISPLAYITEM.PY
 -Shows the information about the item
@@ -45,6 +47,7 @@ DISPLAYITEM.PY
 	-if the bid is lower than the previous bid, then an alert will tell you you did
 		not successfully bid
 	-otherwise it bids
+-disables the bidding option if you are not logged in or you own the item
 
 Files and Explanations
 users.txt
@@ -60,3 +63,5 @@ allfile.txt
 watch.txt
 	-keeps tracks of what a user bids on so they can know if they were
 	outbid or not
+itemnumber.txt
+	-keeps track of the number of items so we know what the next itemnumber is

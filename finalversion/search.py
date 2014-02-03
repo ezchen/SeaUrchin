@@ -142,7 +142,7 @@ def makeThumbNail(itemid, imageName, itemName, bid, user, category, condition):
 
 
 def getImageName(itemNumber, filedirectory = '../data/images'):
-	imageFiles = glob.glob('../data/images/*.png') + glob.glob('../data/images/*.jpg')
+	imageFiles = glob.glob('../data/images/*.png') + glob.glob('../data/images/*.jpg') + glob.glob('../data/images/*.gif')
 
 	itemname = 'nopicture.jpg'
 
@@ -152,8 +152,6 @@ def getImageName(itemNumber, filedirectory = '../data/images'):
 		D = lf.organizeData('../data/allfile.txt')
 		if itemNumber in D:
 			itemname = D[itemNumber][0]
-			user = lf.getUser()
-			name = user + itemname
 
 			for image in imageFiles:
 				itemid = stripEnding(os.path.basename(image))

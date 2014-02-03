@@ -32,7 +32,7 @@ def buyingData(username = user):
 	for item in items:
 		for line in L:
 			if item in line and line[2] != user:
-				D[line[1]] = [line[0],line[2],line[3],line[4],line[5]]
+				D[line[0]] = [line[1],line[2],line[3],line[4],line[5]]
 	return D
 
 def stripEnding(image):
@@ -92,7 +92,7 @@ def displaySold():
 		block+='''<tr><th><h3>You Are Not Selling Anything</h3></th></tr>'''
 	else:
 		block +='''<tr>
-			<th>ItemId</th>
+			<th>image</th>
 			<th>ItemName</th>
 			<th>category</th>
 			<th>Bidder</th>
@@ -101,7 +101,15 @@ def displaySold():
 		</tr>
 		'''
 		for item in items:
-			block += '<tr><td>' + item + '</td>'
+			imageName = lf.getImageName(item)
+			link = '''<ul class="thumbnails">
+				<li>
+					<a href="displayItem.py?itemid=%s" class="thumbnail" stlye="height: 120px; width: 160px">
+						<img src="%s" alt="item image" style="height: 120px; width:160px">
+					</a>
+				</li>
+			</ul>''' % (item,'../data/images/%s' % imageName)
+			block += '<tr><td>' + link + '</td>'
 			for data in items[item]:
 				block += '<td>' + data + '</td>'
 	
@@ -126,21 +134,29 @@ def displayBuying(username = lf.getUser()):
 		block += '''<tr><th><h3>You Are Not Bidding On Anything</h3></th></tr>'''
 	else:
 		block += '''<tr>
-			<th>Itemname</th>
-			<th>Itemid</th>
+			<th>image</th>
+			<th>itemname</th>
 			<th>owner</th>
 			<th>category</th>
 			<th>Bid</th>
 		</tr>
 	'''
 		for item in items:
+			imageName = lf.getImageName(item)
+			link = '''<ul class="thumbnails">
+				<li>
+					<a href="displayItem.py?itemid=%s" class="thumbnail" stlye="height: 120px; width: 160px">
+						<img src="%s" alt="item image" style="height: 120px; width:160px">
+					</a>
+				</li>
+			</ul>''' % (item,'../data/images/%s' % imageName)
 			if username not in items[item]:
 				block += '<tr class="error"><td>' + item + '</td>'
 				for data in items[item][:-1]:
 					block += '<td>' + data + '</td>'
 				block += '</tr>'
 			else:
-				block += '<tr><td>' + item + '</td>'
+				block += '<tr><td>' + link + '</td>'
 				for data in items[item][:-1]:
 					block += '<td>' + data + '</td>'
 				block += '</tr>'

@@ -1,4 +1,13 @@
-002,itemname3,username3,category,1000,ericchen10,condition,This is a high quality item that I am using to test this site
-3,asdf,ericchen10,All,200,bidder,condition,description
-4,asdf,ericchen10,All,200,bidder,condition,description
-5,asdf,ericchen10,All,2000,bidder,10,description
+11,ice skates,newuser,All,20,bidder,7,sort of old. But works great! just sharpened
+13,sat book,newuser,All,5,bidder,8,this is a barrons sat a book. I did not write in it and I thought I might as well sell it. Great condition
+12,lunar glide V4,newuser,All,200,ericchen10,10,These are brand new. Never worn. I just dont have the tags
+15,head first java,newuser,Education,20,bidder,8,Barely used, great condition, never wrote in it
+14,glass bottle,newuser,All,2,bidder,10,very classy
+002,itemname3,username3,category,30000000000000,ericchen10,condition,This is a high quality item that I am using to test this site
+3,anything,newuser,All,200,bidder,10,it's awesome
+5,asdf,newuser,All,2000,bidder,10,also awesome
+4,morethings,newuser,All,2000,bidder,10,anything
+7,iphone,newuser,All,150,bidder,5,sort of cracked
+6,skateboard,newuser,All,300,bidder,10,really expensive skateboard
+9,binder,ericchen10,All,10,bidder,10,10 each
+8,samsung galaxy,newuser,All,300,bidder,10,it's a good phone

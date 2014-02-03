@@ -1,6 +1,7 @@
 import cgi, cgitb
 cgitb.enable()
 import md5
+import glob
 import os
 import time
 #<----------------------------------------------------------->
@@ -148,7 +149,7 @@ def makeNavBar(filedirectory = '../data/loggedin.txt'):
 	navbar = '''<div class="navbar navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand" href="homepage.py">Sea-Urchin</a>
+			<a class="brand" href="search.py">Sea-Urchin</a>
 			<form class="navbar-form pull-left" name="input" action="search.py" method="get">
 				<input type="text" name="search" placeholder="search">
 				<select name="category">
@@ -174,14 +175,30 @@ def makeNavBar(filedirectory = '../data/loggedin.txt'):
 				</li>
 			</ul>'''
 	else:
-		navbar += '''<a href="homepage.py">Login</a>'''
+		navbar += '''
+			<ul class="nav pull-right">
+					<li class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							Login
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="homepage.py"><i class="icon-user"></i> login</a></li>
+							<li><a href="create.html"><i class="icon-ok-circle"></i> join</a></li>
+						</ul>
+						</li>
+					</ul>
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>'''
 	navbar += '''</div>
 	</div>
 </div>'''
 	return navbar
 
 
-def redirectPage():
+def redirectPage(page='homepage.py'):
 	out = '''<!DOCTYPE html>
 	<html>
 	<head>
@@ -189,11 +206,36 @@ def redirectPage():
 	</head>
 	<body>
 	If you are not automatically redirected,
-	<a href="homepage.py">Click here to Login</a>
+	<a href="%s">Click here to Login</a>
 	</body>
-	</html>'''
+	</html>''' % (page,)
 	return out
 
+def stripEnding(string):
+	index = string.find('.')
+	return string[:index]
+
+def getImageName(itemNumber, filedirectory = '../data/images'):
+	imageFiles = glob.glob('../data/images/*.png') + glob.glob('../data/images/*.jpg') + glob.glob('../data/images/*.gif')
+
+	itemname = 'nopicture.jpg'
+
+	if itemNumber == 'nopicture':
+		itemname = 'nopicture.jpg'
+	else:
+		D = organizeData('../data/allfile.txt')
+		if itemNumber in D:
+			itemname = D[itemNumber][0]
+			user = getUser()
+			name = user + itemname
+
+			for image in imageFiles:
+				itemid = stripEnding(os.path.basename(image))
+				if itemNumber == itemid:
+					return os.path.basename(image)
+				else:
+					itemname = 'nopicture.jpg'
+	return itemname
 
 
 

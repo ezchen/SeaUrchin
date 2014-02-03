@@ -1,1 +1,2 @@
+69.22.238.234,newuser,true
 70.15.130.97,ericchen10,true

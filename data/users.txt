@@ -6,3 +6,4 @@ super,5be84a45e876cf3cc8a977451e790bc1,asdfasdf@
 ericchen20,5be84a45e876cf3cc8a977451e790bc1,echen2015@gmail.com
 ericchen123123,5be84a45e876cf3cc8a977451e790bc1,asdf@
 ericchen10,5be84a45e876cf3cc8a977451e790bc1,asdfasdfasdf@
+newuser,5be84a45e876cf3cc8a977451e790bc1,asdf@asdf

@@ -97,8 +97,6 @@ def itemName(filedirectory = '../data/images'):
 		D = lf.organizeData('../data/allfile.txt')
 		if itemnumber in D:
 			itemname = D[itemnumber][0]
-			user = lf.getUser()
-			name = user + itemname
 
 			for image in imageFiles:
 				itemid = stripEnding(os.path.basename(image))
@@ -117,16 +115,26 @@ def makeForm():
 		condition = D[itemnumber][-2]
 		bid = D[itemnumber][-4]
 		username = D[itemnumber][1]
+		if lf.getUser() == username:
+			disabled = 'disabled'
+			username = 'you own this item'
+			alert = 'text-error'
+		elif lf.getUser() == -1:
+			disabled='disabled'
+			alert =''
+		else:
+			disabled = ''
+			alert = ''
 	else:
 		itemname=description=condition=bid=username = "We're sorry, this item doesn't exist"
 	#itemname
 	html = '\n<div class="span4">' + '\n<h3>Current Bid</h3>'
 	html += '\n' + bid + '$' + '''<form class="form-inline" method="get" action="displayItem.py">
 	<div class="field">
-		<input type="text" class="input" name="bid" placeholder="bid">
-	<input type="hidden" name="itemid" value="''' + fieldData['itemid'] + '''">
-	<input type="submit" class="button" value="bid">
-	</form>''' + '\n</div></div>\n'
+		<input type="text" class="input" name="bid" %s placeholder="bid">
+	<input type="hidden" name="itemid" value="''' % (disabled) + fieldData['itemid'] + '''">
+	<input type="submit" class="btn" %s  value="bid">
+	</form>\n</div></div>\n''' % disabled
 	html += '\n<div class="span4">' + '\n<h3>ItemName</h3>'
 	html += '\n' + itemname + '\n</div>'
 	#condition
@@ -138,8 +146,8 @@ def makeForm():
 	html += '''</div>'''
 
 	#Owner and info
-	html += '\n<div class="span12">'
-	html += '\n' + '<strong>Owner</strong>: ' + username + '<br>' + '<strong>Email</strong>: ' + getEmail(username) + '</div>'
+	html += '\n<div class="span12 %s">' % (alert)
+	html += '\n' + '<strong>Owner</strong>: ' + username + '<br>' + '<strong>Email</strong>: ' + getEmail(D[itemnumber][1]) + '</div>'
 	html += '\n</div>'
 
 	return html
@@ -148,32 +156,29 @@ def makeForm():
 
 
 
-if lf.isLoggedIn():
-	print '''<!DOCTYPE html>
-	<html>
-	<head>
-		<title>View</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	</head>
-	<body>
-	<script src="js/bootstrap.min.js"></script>'''
-	page = lf.makeNavBar()
-	page += '<div class="container">'
-	page += '<div class="row">'
-	page += '<div class="span8" style="min-height:430px">'
-	page += '''
+print '''<!DOCTYPE html>
+<html>
+<head>
+	<title>View</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<script src="js/bootstrap.min.js"></script>'''
+page = lf.makeNavBar()
+page += '<div class="container">'
+page += '<div class="row">'
+page += '<div class="span8" style="min-height:430px">'
+page += '''
 <ul class="thumbnails">
-	<li class="span8">
-		<div class="thumbnail" style="min-height:430px">
-			<img src="../data/images/''' + itemName() + '''"alt="Item"></div></div>'''
-	if 'bid' in fieldData:
-		page+='<div class="span4"><div class="alert alert-error">' + bid() + '</div></div>'
-	page += makeForm()
-	print page + '</div></div>'
-	
-	
-	print '''</body>
-	</html>'''
-else:
-	print lf.redirectPage()
+<li class="span8">
+	<div class="thumbnail" style="min-height:430px">
+		<img src="../data/images/''' + itemName() + '''"alt="Item"></div></div>'''
+if 'bid' in fieldData:
+	page+='<div class="span4"><div class="alert alert-error">' + bid() + '</div></div>'
+page += makeForm()
+print page + '</div></div>'
+
+
+print '''</body>
+</html>'''

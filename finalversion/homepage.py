@@ -131,6 +131,7 @@ def makeFailLoginPage():
 def alreadyLoggedIn():
 	return '''<html>
 	<head>
+		<meta http-equiv="refresh" content="0; url=search.py">
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body background="../data/boat.jpg">
